@@ -1,0 +1,1 @@
+web: gunicorn TaskStreak.wsgi --log-file -
