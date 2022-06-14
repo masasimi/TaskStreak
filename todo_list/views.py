@@ -1,5 +1,8 @@
 from django.contrib.auth import authenticate, models, login, logout
 from django.db import IntegrityError
+
+from django.views.decorators.csrf import requires_csrf_token
+
 from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
 from django.http import HttpResponseServerError
 from django.shortcuts import render
@@ -27,7 +30,6 @@ def index(request: HttpRequest) -> HttpResponse:
             task.isDoneToday = True
         else :
             task.isDoneToday = False
-        print (task.isDoneToday)
         task.save()
         
     return render(
@@ -227,6 +229,7 @@ def detail_view(request: HttpRequest) -> HttpResponse:
         {'username': request.user.username, 'task': task, 'lastDate' : lastDate , 'isNotyet' : isNotyet}
     )
 
+@requires_csrf_token
 def my_customized_server_error(request, template_name='500.html'):
     import sys
     from django.views import debug
