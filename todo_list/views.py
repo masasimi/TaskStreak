@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, models, login, logout
 from django.db import IntegrityError
 from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseServerError
 from django.shortcuts import render
 
 import datetime
@@ -225,3 +226,10 @@ def detail_view(request: HttpRequest) -> HttpResponse:
         'todo_list/todo_detail.html',
         {'username': request.user.username, 'task': task, 'lastDate' : lastDate , 'isNotyet' : isNotyet}
     )
+
+@requires_csrf_token
+def my_customized_server_error(request, template_name='500.html'):
+    import sys
+    from django.views import debug
+    error_html = debug.technical_500_response(request, *sys.exc_info()).content
+    return HttpResponseServerError(error_html)
