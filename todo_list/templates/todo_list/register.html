@@ -1,0 +1,27 @@
+{% extends 'todo_list/base.html' %}
+
+{% block header %}
+<h1>Register</h1>
+{% endblock header %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <div class="mb-3">
+        <label for="username" class="form-label">UserName : </label>
+        <input type="text" class="form-control" name="username" id="username" aria-describedby="nameHelp">
+        <div id="nameHelp" class="form-text">The username must be unique.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password : </label>
+        <input type="password" class="form-control" name="password" id="password" aria-describedby="passwordHelp">
+        <div id="passwordHelp" class="form-text">Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.</div>
+    </div>
+
+    <input type="submit" value="register" class="btn btn-primary">
+    <a class="btn btn-outline-secondary" href="{% url 'login' %}">cancel</a>
+</form>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'todo_list/base.html' %}
+
+{% block header %}
+<h1>Edit Task</h1>
+{% endblock header %}
+
+{% block content %}
+<form action="/task/update/" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ task.id }}">
+    <div class="mb-3">
+        <label for="title" class="form-label">Task Title : </label>
+        <input type="text" class="form-control" name="title" value="{{ task.title }}" aria-describedby="titleHelp" required>
+        <div id="titleHelp" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Task Description : </label>
+        <textarea type="textarea" class="form-control" name="description" aria-describedby="descriptionHelp">{{ task.description }}</textarea>
+        <div id="descriptionHelp" class="form-text"></div>
+    </div>
+
+    <input type="submit" value="update" class="btn btn-primary">
+    <a class="btn btn-outline-secondary" href="{% url 'index' %}" role="button">cancel</a>
+</form>
+{% endblock content %}

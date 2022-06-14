@@ -1,0 +1,26 @@
+{% extends 'todo_list/base.html' %}
+
+{% block header %}
+<h1>Create New Task</h1>
+{% endblock header %}
+
+{% block content %}
+<form action="/task/create/" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Task Title : </label>
+        <input type="text" class="form-control" name="title" aria-describedby="titleHelp" required>
+        <div id="titleHelp" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Task Description : </label>
+        <textarea class="form-control" name="description" aria-describedby="descriptionHelp"></textarea>
+        <div id="descriptionHelp" class="form-text"></div>
+    </div>
+
+    <input type="submit" value="create" class="btn btn-primary">
+    <a class="btn btn-outline-secondary" href="{% url 'index' %}" role="button">cancel</a>
+</form>
+
+
+{% endblock content %}
