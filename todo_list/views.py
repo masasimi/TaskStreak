@@ -24,9 +24,9 @@ def index(request: HttpRequest) -> HttpResponse:
     yesterday = (now - datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
     yesterdayEnd = yesterday.replace(hour=23, minute=59, second=59, microsecond=999999)
     for task in tasks:
-        if task.lastDate < yesterday:
+        if localtime(task.lastDate) < yesterday:
             task.currentStreak = 0
-        if task.currentStreak and yesterdayEnd < task.lastDate:
+        if task.currentStreak and yesterdayEnd < localtime(task.lastDate):
             task.isDoneToday = True
         else :
             task.isDoneToday = False
@@ -145,7 +145,7 @@ def done_task(request: HttpRequest) -> HttpResponse:
     yesterday = (now - datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
     yesterdayEnd = yesterday.replace(hour=23, minute=59, second=59, microsecond=999999)
 
-    if task.lastDate <= yesterdayEnd or task.isDoneToday == False:
+    if localtime(task.lastDate) <= yesterdayEnd or task.isDoneToday == False:
         task.streakSum += 1
         task.currentStreak += 1
 
@@ -216,11 +216,11 @@ def detail_view(request: HttpRequest) -> HttpResponse:
     yesterday = (now - datetime.timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
     yesterdayEnd = yesterday.replace(hour=23, minute=59, second=59, microsecond=999999)
 
-    if yesterdayEnd < task.lastDate and task.isDoneToday == False:
+    if yesterdayEnd < localtime(task.lastDate) and task.isDoneToday == False:
         isNotyet = True
     else:
         isNotyet = False
-    lastDate = task.lastDate.strftime("%Y-%m-%d")
+    lastDate = localtime(task.lastDate).strftime("%Y-%m-%d")
 
 
     return render(

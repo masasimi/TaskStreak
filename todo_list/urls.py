@@ -2,7 +2,8 @@ from django.urls import path
 
 from . import views
 
-handler500 = views.my_customized_server_error
+#handler500 = views.my_customized_server_error
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('login/', views.login_view, name='login'),
