@@ -23,52 +23,53 @@
 </div>
 
 {% if tasks %}
-    <div class="shadow-sm p-3 mb-5 bg-white rounded">
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col"> </th>
-                <th scope="col">Title</th>
-                <th scope="col">Current Streak</th>
-                <th scope="col">Streak Sum</th>
-                <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for task in tasks %}
-            
-            <tr>
+    <div class="shadow-sm p-3 mb-3 bg-white rounded">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Current Streak</th>
+                    <th scope="col">Streak Sum</th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for task in tasks %}
+                
+                
                 {% if task.isDoneToday %}
-                <td class="bg-info">
+                    <tr class="table-success">
                 {% else %}
-                <td class="bg-light">
+                    <tr class="table-default">
                 {% endif %}
-                <td>{{ task.title }}</td>
-                <td>{{ task.currentStreak }} days</td>
-                <td>{{ task.streakSum }} days</td>
-                <td>
-                    <div class="d-flex flex-row mb-3">
-                        <div class="mx-1">
-                            <form action="task/done/" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{ task.id }}">
-                                <input type="submit" class="btn btn-primary" value="done">
-                            </form>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.currentStreak }} days</td>
+                    <td>{{ task.streakSum }} days</td>
+                    <td>
+                        <div class="d-flex flex-row mb-3">
+                            <div class="mx-1">
+                                <form action="task/done/" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ task.id }}">
+                                    <input type="submit" class="btn btn-primary" value="done">
+                                </form>
+                            </div>
+                            <div class="mx-1">
+                                <form action="task/detail/" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ task.id }}">
+                                    <input type="submit" class="btn btn-outline-success" value="detail">
+                                </form>
+                            </div>
                         </div>
-                        <div class="mx-1">
-                            <form action="task/detail/" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{ task.id }}">
-                                <input type="submit" class="btn btn-outline-success" value="detail">
-                            </form>
-                        </div>
-                    </div>
 
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% else %}
     <p>No task is registered.</p>
