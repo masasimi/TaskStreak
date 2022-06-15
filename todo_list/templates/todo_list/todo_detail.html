@@ -7,27 +7,27 @@
 {% block content %}
 <div class="card">
     <div class="card-body">
-        <h2>{{task.title}}</h2>
+        <h3>{{task.title}}</h3>
         <p>{{task.description}}</p>
         <div class="d-flex justify-content-around">
             <div>
                 <div class="text-center">
                     <small class="">Longest Streak</small>
-                    <h3 class="">{{task.longestStreak}} days</h3>
+                    <h4 class="">{{task.longestStreak}} days</h4>
                 </div>
             </div>
 
             <div>
                 <div class="text-center">
                     <small class="">Current Streak</small>
-                    <h3 class="">{{task.currentStreak}} days</h3>
+                    <h4 class="">{{task.currentStreak}} days</h4>
                 </div>
             </div>
 
             <div>
                 <div class="text-center">
                     <small class="">Streak Sum</small>
-                    <h3 class="">{{task.streakSum}} days</h3>
+                    <h4 class="">{{task.streakSum}} days</h4>
                 </div>
             </div>
 
@@ -35,9 +35,9 @@
                 <div class="text-center">
                     <small class="">Last Done</small>
                     {% if isNotyet %}
-                    <h3 class="">Not yet</h3>
+                    <h4 class="">Not yet</h4>
                     {% else %}
-                    <h3 class="">{{lastDate}}</h3>
+                    <h4 class="">{{lastDate}}</h4>
                     {% endif %}
                     
                 </div>
