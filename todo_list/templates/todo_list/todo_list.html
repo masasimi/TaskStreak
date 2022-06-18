@@ -1,23 +1,11 @@
 {% extends 'todo_list/base.html' %}
 
-{% block header %}
-<h1>Task List of {{ username }}</h1>
-{% endblock header %}
-
-
-
 {% block content %}
 <div class="d-flex flex-row mb-3">
     <div class="mx-1">
         <form action="/task/new/" method="post">
             {% csrf_token %}
             <input type="submit" class="btn btn-primary" value="create new task">
-        </form>
-    </div>
-    <div class="mx-1">
-        <form action="/logout/" method="post">
-            {% csrf_token %}
-            <input type="submit" class="btn btn-outline-secondary" value="logout">
         </form>
     </div>
 </div>

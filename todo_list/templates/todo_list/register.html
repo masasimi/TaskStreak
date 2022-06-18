@@ -1,11 +1,7 @@
 {% extends 'todo_list/base.html' %}
 
-{% block header %}
-<h1>Register</h1>
-{% endblock header %}
-
 {% block content %}
-
+<h2>Register</h2>
 <form method="post">
     {% csrf_token %}
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}

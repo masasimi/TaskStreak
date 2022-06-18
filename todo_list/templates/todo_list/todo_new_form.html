@@ -1,10 +1,7 @@
 {% extends 'todo_list/base.html' %}
 
-{% block header %}
-<h1>Create New Task</h1>
-{% endblock header %}
-
 {% block content %}
+<h2>Create New Task</h2>
 <form action="/task/create/" method="post">
     {% csrf_token %}
     <div class="mb-3">
